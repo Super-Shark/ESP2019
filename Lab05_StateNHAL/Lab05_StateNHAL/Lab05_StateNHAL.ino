@@ -20,7 +20,7 @@
 
 static Main main;
 
-void setup() {
+void setup() {//TESTTESTTEST
 	main.initialize();
 }
 
