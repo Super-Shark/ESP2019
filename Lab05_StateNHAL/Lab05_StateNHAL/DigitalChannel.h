@@ -1,5 +1,3 @@
-// DigitalOutputChannel.h
-
 #ifndef _DIGITALOUTPUTCHANNEL_h
 #define _DIGITALOUTPUTCHANNEL_h
 
@@ -11,22 +9,15 @@
 
 #include "Channel.h"
 
-class DigitalOutputChannel : public Channel
-{
+class DigitalChannel : public Channel{
 public:
-	DigitalOutputChannel(int pinNum) : Channel(pinNum)
-	{}
-
-	~DigitalOutputChannel() {}
-
-	void initialize() {
-		pinMode(Channel::pinNum_, OUTPUT);
-	}
-
+	DigitalChannel(int pinNum, int type) : Channel(pinNum, type) {}
+	~DigitalChannel() {}
+	void initialize() {}
 	void finalize() {}
 
 	int read() {
-		return 0;
+		return digitalRead(Channel::pinNum_);
 	}
 
 	void write(int toWrite) {

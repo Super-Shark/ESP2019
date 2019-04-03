@@ -1,83 +1,58 @@
-// 
-// 
-// 
+#ifndef _LEDMANAGER_
+#define _LEDMANAGER_
 
-#include "LEDManager.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "arduino.h"
+#else
+#include "WProgram.h"
+#endif
 
-LEDManager::LEDManager() :
-	illuminantChannel(0),
+#include "Domain.h"
 
-	ultrasonicWaveChannelTransmitter(7),
-	ultrasonicWaveChannelReceiver(6),
+#define  BRIGHT				                800
+#define  DARK_LEVEL				            3
+#define  CM_FACTOR				            58.2
 
-	rgbLEDchannelRed(3),
-	rgbLEDchannelGreen(10),
-	rgbLEDchannelBlue(5),
+#define  DISTANCE_LEVEL_1				    10
+#define  DISTANCE_LEVEL_2				    15
+#define  DISTANCE_LEVEL_3				    20
 
-	illuminant(Illuminant::EChannelId::eIdCDS, &illuminantChannel),
+class LEDManager : public Domain
+{
+private:
+	Sensor *lightSensor;
+	Sensor *proximitySensor;
+	RGBLED *rgbLED;
+public:
+	LEDManager(Sensor &illuminantSensor, Sensor &ultrasonicWaveSensor): lightSensor (&illuminantSensor), proximitySensor(&ultrasonicWaveSensor){}
+	~LEDManager(){}
+	void initialize() {}
+	void finalize() {}
 
-	ultrasonicWave(UltrasonicWave::EChannelId::eIdTransmitter, &ultrasonicWaveChannelTransmitter,
-				   UltrasonicWave::EChannelId::eIdReceiver, &ultrasonicWaveChannelReceiver),
+	void process() {
+		int lightFactor = lightSensor->getVal() > BRIGHT ? 1 : DARK_LEVEL;
+		int distance = proximitySensor->getVal() / CM_FACTOR;
 
-	rgbLED(RGBLED::EChannelId::eIdRed, &rgbLEDchannelRed,
-		RGBLED::EChannelId::eIdGreen, &rgbLEDchannelGreen,
-		RGBLED::EChannelId::eIdBlue, &rgbLEDchannelBlue)
-{}
-
-LEDManager::~LEDManager() {}
-
-void LEDManager::initialize() {
-	this->illuminant.initialize();
-	this->ultrasonicWave.initialize();
-	this->rgbLED.initialize();
-
-	this->illuminant.start();
-	this->ultrasonicWave.start();
-	this->rgbLED.start();
-}
-
-void LEDManager::finalize() {
-	this->illuminant.finalize();
-	this->ultrasonicWave.finalize();
-	this->rgbLED.finalize();
-}
-
-void LEDManager::process() {
-	int lightFactor = illuminant.getCDSLight() > 800 ? 1 : 3;
-	int distance = ultrasonicWave.getElapsedTime() / 58.2;
-
-	if (distance < 3) {
-		rgbLED.setRGBValue(0, 0, 0);
+		if (distance < DISTANCE_LEVEL_1) {
+			rgbLED.setRGBValue(0, 0, 0);
+		}else if (distance < DISTANCE_LEVEL_2) {
+			rgbLED.setRGBValue(255 / lightFactor, 0, 0);
+		}else if (distance < DISTANCE_LEVEL_3) {
+			rgbLED.setRGBValue(0, 255 / lightFactor, 0);
+		}else {
+			rgbLED.setRGBValue(0, 0, 0);
+		}
 	}
-	else if (distance < 8) {
-		rgbLED.setRGBValue(255/lightFactor, 0, 0);
+	void order() {
+		if (this->rgbLED.wait()) {
+			this->rgbLED.start();
+		}
 	}
-	else if (distance < 12) {
-		rgbLED.setRGBValue(0, 255/lightFactor, 0);
+	void run() {
+		this->process();
+		this->order();
 	}
-	else if (distance < 16) {
-		rgbLED.setRGBValue(0, 0, 255/lightFactor);
-	}
-	else {
-		rgbLED.setRGBValue(0, 0, 0);
-	}
-}
+};
 
-void LEDManager::actuate() {
-	if (this->rgbLED.wait()) {
-		this->rgbLED.start();
-	}
-}
+#endif
 
-void LEDManager::run() {
-	if (this->illuminant.wait()) {
-		this->illuminant.start();
-	}
-
-	if (this->ultrasonicWave.wait()) {
-		this->ultrasonicWave.start();
-	}
-
-	this->process();
-	this->actuate();
-}

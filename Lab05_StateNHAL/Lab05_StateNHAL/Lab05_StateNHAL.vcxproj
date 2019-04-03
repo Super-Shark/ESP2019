@@ -113,21 +113,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actuator.h" />
-    <ClInclude Include="AnalogInputChannel.h" />
+    <ClInclude Include="AnalogChannel.h" />
     <ClInclude Include="Channel.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="DigitalInputChannel.h" />
-    <ClInclude Include="DigitalOutputChannel.h" />
-    <ClInclude Include="Illuminant.h" />
-    <ClInclude Include="LEDManager.h" />
+    <ClInclude Include="Domain.h" />
+    <ClInclude Include="DigitalChannel.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="PWMInputChannel.h" />
-    <ClInclude Include="PWMOutputChannel.h" />
     <ClInclude Include="RGBLED.h" />
     <ClInclude Include="Sensor.h" />
-    <ClInclude Include="SimpleSensor.h" />
-    <ClInclude Include="TRSensor.h" />
-    <ClInclude Include="UltrasonicWave.h" />
     <ClInclude Include="__vm\.Lab05_StateNHAL.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>

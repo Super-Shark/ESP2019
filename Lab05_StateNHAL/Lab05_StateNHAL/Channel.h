@@ -9,25 +9,20 @@
 #include "WProgram.h"
 #endif
 
-class Channel
-{
+class Channel{
 protected:
 	int pinNum_;
-
+	int pinType_;
 public:
-	Channel(int pinNum) : pinNum_(pinNum)
-	{}
-
+	Channel(int pinNum, int type) : pinNum_(pinNum), pinType_(type) {}
 	~Channel() {}
+	void initialize() {
+		pinMode(pinNum_, pinType_);//생성자로 옮겨도 되나 확인.
+	};
+	virtual void finalize()=0;
 
-	virtual void initialize();
-	virtual void finalize();
-	virtual int read();
-	virtual void write(int toWrite);
-
-	int getPinNum() {
-		return this->pinNum_;
-	}
+	virtual int read()=0;
+	virtual void write(int toWrite)=0;
 };
 
 #endif

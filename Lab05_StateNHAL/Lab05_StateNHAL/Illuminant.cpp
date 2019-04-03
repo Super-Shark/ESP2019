@@ -1,45 +1,33 @@
-// 
-// 
-// 
+#ifndef _ILLUMINANT_
+#define _ILLUMINANT_
 
-#include "Illuminant.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "arduino.h"
+#else
+#include "WProgram.h"
+#endif
 
-Illuminant::Illuminant(EChannelId eIdCDS, Channel *pIlluminatChannel) {
-	this->pChannels[eIdCDS] = pIlluminatChannel;
-}
+#include "Sensor.h"
+#include "AnalogChannel.h"
 
-Illuminant::~Illuminant() {}
-
-void Illuminant::initialize() {
-	for (Channel *pChannel : this->pChannels) {
-		pChannel->initialize();
+class Illuminant : public Sensor{
+public:
+private:
+	AnalogChannel inputChannel;
+public:
+	Illuminant(int pinNum) : inputChannel(pinNum, INPUT) {};
+	~Illuminant() {};
+	void initialize() {
+		this->inputChannel.initialize();
 	}
-	this->eState = EState::eReady;
-}
-
-void Illuminant::finalize() {
-	for (Channel *pChannel : this->pChannels) {
-		pChannel->finalize();
+	void finalize() {
+		this->inputChannel.finalize();
 	}
-}
-
-void Illuminant::start() {
-	if (this->eState == EState::eReady) {
-		this->eState = EState::eRunning;
+	void sense() {
+		this->val = this->inputChannel.read();
 	}
-}
-
-bool Illuminant::wait() {
-	if (this->eState == EState::eRunning) {
-		for (Channel *pChannel : this->pChannels) {
-			this->cdsLight_ = pChannel->read();
-		}
-		this->eState = EState::eReady;
-		return true;
+	int getVal2() {
+		return this->getVal();
 	}
-	return false;
-}
-
-int Illuminant::getCDSLight() {
-	return this->cdsLight_;
-}
+};
+#endif

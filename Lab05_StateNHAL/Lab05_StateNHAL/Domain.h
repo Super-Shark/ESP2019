@@ -9,14 +9,14 @@
 	#include "WProgram.h"
 #endif
 
-class Component
+class Domain
 {
 public:
-	virtual void initialize();
-	virtual void finalize();
-	virtual void process();
-	virtual void actuate();
-	virtual void run();
+	virtual void initialize()=0;
+	virtual void finalize()=0;
+	virtual void process()=0;
+	virtual void order()=0;
+	virtual void run()=0;
 };
 
 #endif

@@ -9,13 +9,15 @@
 	#include "WProgram.h"
 #endif
 
-class Sensor
-{
+class Sensor{
 public:
-	virtual void initialize();
-	virtual void finalize();
-	virtual void start();
-	virtual bool wait();
+	int val;
+	virtual void initialize()=0;
+	virtual void finalize()=0;
+	virtual void sense()=0;
+	int getVal() {
+		return val;
+	}
 };
 
 #endif

@@ -9,40 +9,70 @@
 #include "WProgram.h"
 #endif
 
-#include "LEDManager.h"
+#include "Illuminant.cpp"
+#include "UltrasonicWave.cpp"
+#include "LEDManager.cpp"
 
-class Main
-{
+//Iluminant
+#define _ANALOG_PIN_NUM_FOR_ILLUMINANT				    0
+
+//Ultra Sonic
+#define _DIGITAL_PIN_NUM_FOR_ULTRASONIC_VCC				7
+#define _DIGITAL_PIN_NUM_FOR_ULTRASONIC_ECHO			6
+
+class Main{
 private:
+	enum ESensor {
+		eIlluminant,
+		eUltraSonic,
+		eNumSeonsors
+	};
+	Illuminant illuminant;
+	UltrasonicWave ultrasonicWave;
+	Sensor *sensors[eNumSeonsors];
+
+	enum EDomain {
+		eLEDManager,
+		eNumDomains
+	};
 	LEDManager ledManager;
-
+	Domain *domains[eNumDomains];
 public:
-	Main() {}
+	Main() : 
+		illuminant(_ANALOG_PIN_NUM_FOR_ILLUMINANT),
+        ultrasonicWave(_DIGITAL_PIN_NUM_FOR_ULTRASONIC_VCC, _DIGITAL_PIN_NUM_FOR_ULTRASONIC_ECHO),
+		ledManager(illuminant, ultrasonicWave)
+	{
+		this->sensors[eIlluminant] = &illuminant;
+		this->sensors[eUltraSonic] = &ultrasonicWave;
+
+		this->domains[eLEDManager] = &ledManager;
+	}
 	~Main() {}
-
 	void initialize() {
-		this->ledManager.initialize();
+		for (Sensor *sensor : this->sensors) {
+			sensor->initialize();
+		}
+		for (Domain *domian : this->domains) {
+			domian->initialize();
+		}
 	}
-
 	void finalize() {
-		this->ledManager.finalize();
+		for (Sensor *sensor : this->sensors) {
+			sensor->finalize();
+		}
+		for (Domain *domian : this->domains) {
+			domian->finalize();
+		}
 	}
-
 	void run() {
-		unsigned long prev, cur, diff;
-		cur = 0;
-
-		while (true)
-		{
-			this->ledManager.run();
-
-			//prev = cur;
-			//cur = micros();
-			//diff = cur - prev;
-			//Serial.print("   Cur: ");
-			//Serial.print(cur);
-			//Serial.print("   diff: ");
-			//Serial.println(diff);
+		while (true){
+			for (Sensor *sensor : this->sensors) {
+				sensor->sense();
+			}
+			for (Domain *domian : this->domains) {
+				domian->run();
+			}
 		}
 	}
 };

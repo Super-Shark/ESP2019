@@ -15,7 +15,7 @@
 #include "TRSensor.h"
 #include "Actuator.h"
 #include "Sensor.h"
-#include "Component.h"
+#include "Domain.h"
 #include "Main.h"
 
 static Main main;
