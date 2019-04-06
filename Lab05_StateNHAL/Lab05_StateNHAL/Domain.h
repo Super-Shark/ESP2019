@@ -15,7 +15,7 @@ public:
 	virtual void initialize()=0;
 	virtual void finalize()=0;
 	virtual void process()=0;
-	virtual void order()=0;
+	virtual void act()=0;
 	virtual void run()=0;
 };
 

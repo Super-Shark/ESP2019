@@ -19,7 +19,6 @@ public:
 	int read() {
 		return analogRead(Channel::pinNum_);
 	}
-
 	void write(int toWrite) {
 		analogWrite(Channel::pinNum_, toWrite);
 	}

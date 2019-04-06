@@ -1,3 +1,5 @@
+// Actuator.h
+
 #ifndef _ACTUATOR_h
 #define _ACTUATOR_h
 
@@ -7,13 +9,12 @@
 	#include "WProgram.h"
 #endif
 
-    #include "Device.h"
-
-class Actuator : public Device {
+class Actuator
+{
 public:
-	virtual void initialize()=0;
-	virtual void finalize()=0;
-	virtual bool act()=0;
+	virtual void initialize();
+	virtual void finalize();
+	virtual void actuate();
 };
 
 #endif

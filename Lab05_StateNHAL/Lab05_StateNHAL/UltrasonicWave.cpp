@@ -1,11 +1,3 @@
-#ifndef _ULTRASONICWAVE_
-#define _ULTRASONICWAVE_
-
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "arduino.h"
-#else
-#include "WProgram.h"
-#endif
 
 #include "Channel.h"
 #include "DigitalChannel.h"
@@ -32,7 +24,6 @@ private:
 	DigitalChannel echoChannel;
 	Channel *pChannels[eNumChannelIds];
 	unsigned long startTime_;
-	unsigned long elapsedTime_;
 public:
 	UltrasonicWave(int vccPinNum, int echoPinNum) : vccChannel(vccPinNum, OUTPUT), echoChannel(echoPinNum, INPUT){
 		this->pChannels[eIdVCC] = &vccChannel;
@@ -58,7 +49,7 @@ public:
 	}
 	void sense() {
 		if (micros() - this->startTime_ > _TIME_OUT) {
-			this->elapsedTime_ = 0;
+			val = 0;
 			this->initUSS();
 			return;
 		}
@@ -75,15 +66,14 @@ public:
 			}
 		}else if (this->eState == EState::eMeasuring) {
 			if (this->pChannels[eIdEcho]->read() == LOW) {
-				this->elapsedTime_ = micros() - this->startTime_;
+				val = micros() - this->startTime_;
 				this->initUSS();
 			}
 		}
 	}
 	unsigned long getElapsedTime() {
-		return this->elapsedTime_;
+		return val;
 	}
 };
 
-#endif
 

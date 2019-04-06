@@ -12,8 +12,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
-    <RootNamespace>Lab05_StateNHAL</RootNamespace>
-    <ProjectName>Lab05_StateNHAL</ProjectName>
+    <RootNamespace>Lab06_MemoryMGMT</RootNamespace>
+    <ProjectName>Lab06_MemoryMGMT</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -77,8 +77,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\Lab05_StateNHAL;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\OneDrive\문서\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ProjectDir)__vm\.Lab05_StateNHAL.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Lab06_MemoryMGMT;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\libraries;$(ProjectDir)..\..\..\..\..\..\OneDrive\문서\Arduino\libraries;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\avr\include\avr;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.8.1\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.2\include;$(ProjectDir)..\..\..\..\..\..\..\..\Program Files (x86)\Arduino\hardware\tools\avr\lib\gcc\avr\4.9.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)__vm\.Lab06_MemoryMGMT.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
       <PreprocessorDefinitions>__AVR_ATmega328p__;__AVR_ATmega328P__;_VMDEBUG=1;F_CPU=16000000L;ARDUINO=10809;ARDUINO_AVR_UNO;ARDUINO_ARCH_AVR;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -107,24 +107,37 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Lab05_StateNHAL.ino">
+    <None Include="Lab06_MemoryMGMT.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actuator.h" />
-    <ClInclude Include="AnalogChannel.h" />
+    <ClInclude Include="AnalogInputChannel.h" />
     <ClInclude Include="Channel.h" />
-    <ClInclude Include="Device.h" />
-    <ClInclude Include="Domain.h" />
-    <ClInclude Include="DigitalChannel.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="DigitalInputChannel.h" />
+    <ClInclude Include="DigitalOutputChannel.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="Illuminant.h" />
+    <ClInclude Include="LEDManager.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MemoryManager.h" />
+    <ClInclude Include="Message.h" />
+    <ClInclude Include="PWMInputChannel.h" />
+    <ClInclude Include="PWMOutputChannel.h" />
+    <ClInclude Include="RGBLED.h" />
     <ClInclude Include="Sensor.h" />
-    <ClInclude Include="__vm\.Lab05_StateNHAL.vsarduino.h" />
+    <ClInclude Include="SimpleSensor.h" />
+    <ClInclude Include="TRSensor.h" />
+    <ClInclude Include="UltrasonicWave.h" />
+    <ClInclude Include="__vm\.Lab06_MemoryMGMT.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Illuminant.cpp" />
     <ClCompile Include="LEDManager.cpp" />
+    <ClCompile Include="MemoryManager.cpp" />
+    <ClCompile Include="Message.cpp" />
     <ClCompile Include="RGBLED.cpp" />
     <ClCompile Include="UltrasonicWave.cpp" />
   </ItemGroup>
@@ -133,7 +146,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM3" />
+      <UserProperties arduino.upload.port="COM5" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

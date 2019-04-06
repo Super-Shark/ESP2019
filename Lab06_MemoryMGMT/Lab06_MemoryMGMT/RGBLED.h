@@ -11,29 +11,28 @@
 
 #include "Actuator.h"
 #include "Channel.h"
+#include "Globals.h"
 
 class RGBLED: public Actuator
 {
 public:
-	enum EState {
-		eReady,
-		eRunning,
-		eNumStates
-	};
 	enum EChannelId {
 		eIdRed,
 		eIdGreen,
 		eIdBlue,
 		eNumChannelIds
 	};
-private:
-	EState eState;
-	Channel *pChannels[eNumChannelIds];
-	struct _RBGValue {
+	typedef struct _RBGValue {
 		int _R;
 		int _G;
 		int _B;
-	} rgbValue;
+	} RGBValue;
+
+private:
+	Channel *pChannels[eNumChannelIds];
+	int eLishtStateIndex_;
+	int eDistanceStateIndex_;
+	RGBValue rgbValues[ELightState::eNumLightStates][EDistanceState::eNumDistanceStates];
 public:
 	RGBLED(EChannelId eIdRed, Channel *pChannelRed,
 		   EChannelId eIdGreen, Channel *pChannelGreen,
@@ -41,9 +40,8 @@ public:
 	~RGBLED();
 	void initialize();
 	void finalize();
-	void start();
-	bool wait();
-	void setRGBValue(int R, int G, int B);
+	void actuate();
+	void setState(int eLishtStateIndex, int eDistanceStateIndex);
 };
 
 #endif

@@ -5,14 +5,6 @@
 */
 
 // the setup function runs once when you press reset or power the board
-#include "RGBLED.h"
-#include "LEDManager.h"
-#include "UltrasonicWave.h"
-#include "Illuminant.h"
-#include "Illuminant.h"
-#include "SimpleSensor.h"
-#include "UltrasonicWave.h"
-#include "TRSensor.h"
 #include "Actuator.h"
 #include "Sensor.h"
 #include "Domain.h"

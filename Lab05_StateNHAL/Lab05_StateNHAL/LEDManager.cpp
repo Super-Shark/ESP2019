@@ -8,6 +8,9 @@
 #endif
 
 #include "Domain.h"
+#include "Sensor.h"
+#include "Actuator.h"
+//#include "RGBLED.cpp"
 
 #define  BRIGHT				                800
 #define  DARK_LEVEL				            3
@@ -22,10 +25,11 @@ class LEDManager : public Domain
 private:
 	Sensor *lightSensor;
 	Sensor *proximitySensor;
-	RGBLED *rgbLED;
+	Actuator *rgbLED;
 public:
-	LEDManager(Sensor &illuminantSensor, Sensor &ultrasonicWaveSensor): lightSensor (&illuminantSensor), proximitySensor(&ultrasonicWaveSensor){}
-	~LEDManager(){}
+	LEDManager(Sensor &illuminantSensor, Sensor &ultrasonicWaveSensor, Actuator &rgbLED) 
+		: lightSensor(&illuminantSensor), proximitySensor(&ultrasonicWaveSensor), rgbLED(&rgbLED){}
+	~LEDManager() {}
 	void initialize() {}
 	void finalize() {}
 
@@ -34,23 +38,22 @@ public:
 		int distance = proximitySensor->getVal() / CM_FACTOR;
 
 		if (distance < DISTANCE_LEVEL_1) {
-			rgbLED.setRGBValue(0, 0, 0);
+			//rgbLED->setRGBValue(0, 0, 0);
 		}else if (distance < DISTANCE_LEVEL_2) {
-			rgbLED.setRGBValue(255 / lightFactor, 0, 0);
+			//rgbLED->setRGBValue(255 / lightFactor, 0, 0);
+			rgbLED->act();
 		}else if (distance < DISTANCE_LEVEL_3) {
-			rgbLED.setRGBValue(0, 255 / lightFactor, 0);
+			//rgbLED->setRGBValue(0, 255 / lightFactor, 0);
 		}else {
-			rgbLED.setRGBValue(0, 0, 0);
+			//rgbLED->setRGBValue(0, 0, 0);
 		}
 	}
-	void order() {
-		if (this->rgbLED.wait()) {
-			this->rgbLED.start();
-		}
+	void act() {
+		rgbLED->act();
 	}
 	void run() {
 		this->process();
-		this->order();
+		this->act();
 	}
 };
 

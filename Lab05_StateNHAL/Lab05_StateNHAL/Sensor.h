@@ -1,5 +1,3 @@
-// Sensor.h
-
 #ifndef _SENSOR_h
 #define _SENSOR_h
 
@@ -9,7 +7,9 @@
 	#include "WProgram.h"
 #endif
 
-class Sensor{
+	#include "Device.h"
+
+class Sensor : public Device {
 public:
 	int val;
 	virtual void initialize()=0;
@@ -21,4 +21,3 @@ public:
 };
 
 #endif
-

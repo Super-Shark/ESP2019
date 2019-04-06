@@ -11,6 +11,7 @@
 
 #include "Illuminant.cpp"
 #include "UltrasonicWave.cpp"
+#include "RGBLED.cpp"
 #include "LEDManager.cpp"
 
 //Iluminant
@@ -19,6 +20,11 @@
 //Ultra Sonic
 #define _DIGITAL_PIN_NUM_FOR_ULTRASONIC_VCC				7
 #define _DIGITAL_PIN_NUM_FOR_ULTRASONIC_ECHO			6
+
+//RGBLED
+#define _ANALOG_PIN_NUM_FOR_RGBLED_R			        3
+#define _ANALOG_PIN_NUM_FOR_RGBLED_G			        10
+#define _ANALOG_PIN_NUM_FOR_RGBLED_B			        5
 
 class Main{
 private:
@@ -31,6 +37,13 @@ private:
 	UltrasonicWave ultrasonicWave;
 	Sensor *sensors[eNumSeonsors];
 
+	enum EActuator {
+		eRGBLED,
+		eNumActuators
+	};
+	RGBLED rgbLED;
+	Actuator *actuators[eNumActuators];
+
 	enum EDomain {
 		eLEDManager,
 		eNumDomains
@@ -41,17 +54,26 @@ public:
 	Main() : 
 		illuminant(_ANALOG_PIN_NUM_FOR_ILLUMINANT),
         ultrasonicWave(_DIGITAL_PIN_NUM_FOR_ULTRASONIC_VCC, _DIGITAL_PIN_NUM_FOR_ULTRASONIC_ECHO),
-		ledManager(illuminant, ultrasonicWave)
+		rgbLED(_ANALOG_PIN_NUM_FOR_RGBLED_R, _ANALOG_PIN_NUM_FOR_RGBLED_G, _ANALOG_PIN_NUM_FOR_RGBLED_B),
+		ledManager(illuminant, ultrasonicWave, rgbLED)
 	{
+		//Sensor
 		this->sensors[eIlluminant] = &illuminant;
 		this->sensors[eUltraSonic] = &ultrasonicWave;
 
+		//Actuator
+		this->actuators[eRGBLED] = &rgbLED;
+
+		//Domain
 		this->domains[eLEDManager] = &ledManager;
 	}
 	~Main() {}
 	void initialize() {
 		for (Sensor *sensor : this->sensors) {
 			sensor->initialize();
+		}
+		for (Actuator *actuator : this->actuators) {
+			actuator->initialize();
 		}
 		for (Domain *domian : this->domains) {
 			domian->initialize();
@@ -60,6 +82,9 @@ public:
 	void finalize() {
 		for (Sensor *sensor : this->sensors) {
 			sensor->finalize();
+		}
+		for (Actuator *actuator : this->actuators) {
+			actuator->finalize();
 		}
 		for (Domain *domian : this->domains) {
 			domian->finalize();
@@ -73,6 +98,9 @@ public:
 			for (Domain *domian : this->domains) {
 				domian->run();
 			}
+			/*for (Actuator *actuator : this->actuators) {
+				actuator->act();
+			}*/
 		}
 	}
 };

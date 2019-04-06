@@ -1,50 +1,59 @@
-// 
-// 
-// 
+#ifndef _RGBLED_h
+#define _RGBLED_h
 
-#include "RGBLED.h"
+#if defined(ARDUINO) && ARDUINO >= 100
+#include "arduino.h"
+#else
+#include "WProgram.h"
+#endif
 
-RGBLED::RGBLED(EChannelId eIdRed, Channel *pChannelRed,
-		       EChannelId eIdGreen, Channel *pChannelGreen,
-			   EChannelId eIdBlue, Channel *pChannelBlue) {
-	this->pChannels[eIdRed] = pChannelRed;
-	this->pChannels[eIdGreen] = pChannelGreen;
-	this->pChannels[eIdBlue] = pChannelBlue;
-}
+#include "Actuator.h"
+#include "Channel.h"
+#include "AnalogChannel.h"
 
-RGBLED::~RGBLED() {}
-
-void RGBLED::initialize() {
-	for (Channel *pChannel : this->pChannels) {
-		pChannel->initialize();
+class RGBLED : public Actuator {
+public:
+	enum EChannelId {
+		eIdRed,
+		eIdGreen,
+		eIdBlue,
+		eNumChannelIds
+	};
+private:
+	AnalogChannel rOutChannel, gOutChannel, bOutChannel;
+	Channel *pChannels[eNumChannelIds];
+	int _R, _G, _B;
+public:
+	RGBLED(int rPinNum, int gPinNum, int bPinNum) : rOutChannel(rPinNum, OUTPUT), gOutChannel(gPinNum, OUTPUT), bOutChannel(bPinNum, OUTPUT) {
+		this->pChannels[eIdRed] = &rOutChannel;
+		this->pChannels[eIdGreen] = &gOutChannel;
+		this->pChannels[eIdBlue] = &bOutChannel;
 	}
-	this->eState = EState::eReady;
-}
-void RGBLED::finalize() {
-	for (Channel *pChannel : this->pChannels) {
-		pChannel->finalize();
+	~RGBLED() {}
+	void initialize() {
+		for (Channel *pChannel : this->pChannels) {
+			pChannel->initialize();
+		}
 	}
-}
-
-void RGBLED::start() {
-	if (this->eState == EState::eReady) {
-		this->eState = EState::eRunning;
+	void finalize() {
+		for (Channel *pChannel : this->pChannels) {
+			pChannel->finalize();
+		}
 	}
-}
 
-bool RGBLED::wait() {
-	if (this->eState == EState::eRunning) {
-		this->pChannels[eIdRed]->write(this->rgbValue._R);
-		this->pChannels[eIdGreen]->write(this->rgbValue._G);
-		this->pChannels[eIdBlue]->write(this->rgbValue._B);
-		this->eState = EState::eReady;
-		return true;
+	bool act() {
+		_R = 255;
+		_G = 0;
+		_B = 0;
+		this->pChannels[eIdRed]->write(this->_R);
+		this->pChannels[eIdGreen]->write(this->_G);
+		this->pChannels[eIdBlue]->write(this->_B);
 	}
-	return false;
-}
+	void setRGBValue(int R, int G, int B) {
+		this->_R = R;
+		this->_G = G;
+		this->_B = B;
+	}
+};
+#endif
 
-void RGBLED::setRGBValue(int R, int G, int B) {
-	this->rgbValue._R = R;
-	this->rgbValue._G = G;
-	this->rgbValue._B = B;
-}
