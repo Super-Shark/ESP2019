@@ -9,10 +9,10 @@
 	#include "WProgram.h"
 #endif
 
-#include "SimpleSensor.h"
+#include "Sensor.h"
 #include "Channel.h"
 
-class Illuminant: public SimpleSensor
+class Illuminant: public Sensor
 {
 public:
 	enum EChannelId {

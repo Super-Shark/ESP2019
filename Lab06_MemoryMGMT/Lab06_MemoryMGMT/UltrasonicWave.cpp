@@ -6,14 +6,12 @@ UltrasonicWave::UltrasonicWave(EChannelId eIdTransmitter, Channel *pChannelTrans
 	this->pChannels[eIdTransmitter] = pChannelTransmitter;
 	this->pChannels[eIdReceiver] = pChannelReceiver;
 }
-
 UltrasonicWave::~UltrasonicWave() {}
 
 void UltrasonicWave::initialize() {
 	for (Channel *pChannel : this->pChannels) {
 		pChannel->initialize();
 	}
-	this->initialTime_ = micros();
 	this->initUSS();
 }
 
@@ -30,13 +28,13 @@ void UltrasonicWave::initUSS() {
 
 void UltrasonicWave::sense() {
 	if (micros() - this->startTime_ > MJUC_TIME_OUT_OF_MEASURING_IN_MICROSECOND) {
-		this->elapsedTime_ = MJUC_DISTANCE_VERY_CLOSE;
+		this->elapsedTime_ = 0;
 		this->initUSS();
 		return;
 	}
 
 	if (this->eState == EState::eWaitForDeviceReady) {
-		if (micros() - this->startTime_ > 10) {
+		if (micros() - this->startTime_ > MIN_WAIT_TIME) {
 			this->pChannels[eIdTransmitter]->write(LOW);
 			this->eState = EState::eWaitForMeasuring;
 		}
@@ -49,11 +47,9 @@ void UltrasonicWave::sense() {
 	}
 	else if (this->eState == EState::eMeasuring) {
 		if (this->pChannels[eIdReceiver]->read() == LOW) {
-			this->prevElapsedTime_ = this->elapsedTime_;
 			this->elapsedTime_ = micros() - this->startTime_;
 			this->initUSS();
 		}
-
 	}
 }
 

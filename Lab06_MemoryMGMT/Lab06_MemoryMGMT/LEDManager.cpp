@@ -6,14 +6,14 @@
 #include "Globals.h"
 
 LEDManager::LEDManager() :
-	illuminantChannel(MJUC_CHANNEL_ILLUMINANT),
+	illuminantChannel(MJUC_CHANNEL_ILLUMINANT, INPUT),
 
-	ultrasonicWaveChannelTransmitter(MJUC_CHANNEL_ULTRASONIC_WAVE_TRANSMITTER),
-	ultrasonicWaveChannelReceiver(MJUC_CHANNEL_ULTRASONIC_WAVE_RECEIVER),
+	ultrasonicWaveChannelTransmitter(MJUC_CHANNEL_ULTRASONIC_WAVE_TRANSMITTER, OUTPUT),
+	ultrasonicWaveChannelReceiver(MJUC_CHANNEL_ULTRASONIC_WAVE_RECEIVER, INPUT),
 
-	rgbLEDchannelRed(MJUC_CHANNEL_RGBLED_RED),
-	rgbLEDchannelGreen(MJUC_CHANNEL_RGBLED_GREEN),
-	rgbLEDchannelBlue(MJUC_CHANNEL_RGBLED_BLUE),
+	rgbLEDchannelRed(MJUC_CHANNEL_RGBLED_RED, OUTPUT),
+	rgbLEDchannelGreen(MJUC_CHANNEL_RGBLED_GREEN, OUTPUT),
+	rgbLEDchannelBlue(MJUC_CHANNEL_RGBLED_BLUE, OUTPUT),
 
 	illuminant(Illuminant::EChannelId::eIdCDS, &illuminantChannel),
 

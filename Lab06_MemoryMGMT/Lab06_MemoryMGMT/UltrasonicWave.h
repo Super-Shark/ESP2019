@@ -2,15 +2,15 @@
 #define _ULTRASONICWAVE_h
 
 #if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
+#include "arduino.h"
 #else
-	#include "WProgram.h"
+#include "WProgram.h"
 #endif
 
-#include "TRSensor.h"
+#include "Sensor.h"
 #include "Channel.h"
 
-class UltrasonicWave: public TRSensor
+class UltrasonicWave : public Sensor
 {
 public:
 	enum EState {
@@ -27,13 +27,11 @@ public:
 private:
 	EState eState;
 	Channel *pChannels[eNumChannelIds];
-	unsigned long initialTime_;
 	unsigned long startTime_;
 	unsigned long elapsedTime_;
-	unsigned long prevElapsedTime_;
 public:
 	UltrasonicWave(EChannelId eIdTransmitter, Channel *pChannelTransmitter,
-				   EChannelId eIdReceiver, Channel *pChannelReceiver);
+		EChannelId eIdReceiver, Channel *pChannelReceiver);
 	~UltrasonicWave();
 	void initialize();
 	void finalize();
@@ -43,4 +41,3 @@ public:
 };
 
 #endif
-

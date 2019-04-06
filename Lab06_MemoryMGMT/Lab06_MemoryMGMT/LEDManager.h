@@ -10,10 +10,8 @@
 #endif
 
 #include "Component.h"
-#include "AnalogInputChannel.h"
-#include "DigitalInputChannel.h"
-#include "DigitalOutputChannel.h"
-#include "PWMOutputChannel.h"
+#include "AnalogChannel.h"
+#include "DigitalChannel.h"
 #include "Illuminant.h"
 #include "UltrasonicWave.h"
 #include "RGBLED.h"
@@ -29,14 +27,14 @@ public:
 private:
 	EState eState;
 
-	AnalogInputChannel illuminantChannel;
+	AnalogChannel illuminantChannel;//Input
 
-	DigitalOutputChannel ultrasonicWaveChannelTransmitter;
-	DigitalInputChannel ultrasonicWaveChannelReceiver;
+	DigitalChannel ultrasonicWaveChannelTransmitter;//Output
+	DigitalChannel ultrasonicWaveChannelReceiver;//Input
 
-	PWMOutputChannel rgbLEDchannelRed;
-	PWMOutputChannel rgbLEDchannelGreen;
-	PWMOutputChannel rgbLEDchannelBlue;
+	AnalogChannel rgbLEDchannelRed;//Output
+	AnalogChannel rgbLEDchannelGreen;//Output
+	AnalogChannel rgbLEDchannelBlue;//Output
 
 	Illuminant illuminant;
 	UltrasonicWave ultrasonicWave;

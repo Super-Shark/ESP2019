@@ -31,6 +31,7 @@
 #define MJUC_DISTANCE_CLOSE							8	
 #define MJUC_DISTANCE_FAR							10	
 #define MJUC_DISTANCE_VERY_FAR						15
+#define MIN_WAIT_TIME						        10
 
 // 밝기구분(CDS 저항 0~1023)
 #define MJUC_LIGHT_DISTINCTION						800
