@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Channel">
+      <UniqueIdentifier>{a8a1e9c7-73ad-4337-842e-1de08f4f9dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Memory Manager">
+      <UniqueIdentifier>{889c72cb-3855-4680-b4e6-a6ac4cbf4fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Domain">
+      <UniqueIdentifier>{0863f2f7-6b62-49de-8b39-9f0f949073f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component">
+      <UniqueIdentifier>{1207c854-da8b-4759-849b-cfea9bb0bd23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Sensor Component">
+      <UniqueIdentifier>{1b28ad49-eeff-423f-a492-0d43c87f0402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Actuator Component">
+      <UniqueIdentifier>{8cb0a1d1-0d90-4a66-9829-a851682cd8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Timer">
+      <UniqueIdentifier>{0de98d83-914e-4ae3-b48e-d0ce82dfb0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Mapping Table">
+      <UniqueIdentifier>{add5a5d6-5fe9-468a-97b1-9897a45cabfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Mapping Table\Sensor MT">
+      <UniqueIdentifier>{6f51536b-da79-4223-b1ee-9e2e8e0e1ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Mapping Table\Actuator MT">
+      <UniqueIdentifier>{c87e38fc-9f53-474b-96e4-431817014cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Sensor Component\Sensor">
+      <UniqueIdentifier>{36b6222c-f931-4e61-a24c-0bb582ee79a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Sensor Component\Sensor\Illuminant">
+      <UniqueIdentifier>{709cee25-7a6a-4763-9c1f-bca16a040c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Sensor Component\Sensor\Ultra Sonic">
+      <UniqueIdentifier>{fba4faa4-dbe6-4e50-9550-3dd9ca648ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Actuator Component\Actuator">
+      <UniqueIdentifier>{0f6c5f62-fb79-46d9-960c-41caf4375696}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="__vm\.Lab06_MemoryMGMT.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Channel.h">
+      <Filter>Header Files\Channel</Filter>
+    </ClInclude>
+    <ClInclude Include="AnalogChannel.h">
+      <Filter>Header Files\Channel</Filter>
+    </ClInclude>
+    <ClInclude Include="DigitalChannel.h">
+      <Filter>Header Files\Channel</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensor.h">
+      <Filter>Header Files\Component\Sensor Component\Sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBLED.h">
+      <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClInclude>
+    <ClInclude Include="Actuator.h">
+      <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryManager.h">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="LEDManager.h">
+      <Filter>Header Files\Domain</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorComponent.h">
+      <Filter>Header Files\Component\Sensor Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Illuminant.h">
+      <Filter>Header Files\Component\Sensor Component\Sensor\Illuminant</Filter>
+    </ClInclude>
+    <ClInclude Include="UltrasonicWave.h">
+      <Filter>Header Files\Component\Sensor Component\Sensor\Ultra Sonic</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Component\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="SensorMT.h">
+      <Filter>Header Files\Component\Mapping Table\Sensor MT</Filter>
+    </ClInclude>
+    <ClInclude Include="Illuminant_MT.h">
+      <Filter>Header Files\Component\Mapping Table\Sensor MT</Filter>
+    </ClInclude>
+    <ClInclude Include="MSG_Generator.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RGBLED.cpp">
+      <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryManager.cpp">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LEDManager.cpp">
+      <Filter>Header Files\Domain</Filter>
+    </ClCompile>
+    <ClCompile Include="SensorComponent.cpp">
+      <Filter>Header Files\Component\Sensor Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ActuatorComponent.cpp">
+      <Filter>Header Files\Component\Actuator Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Illuminant.cpp">
+      <Filter>Header Files\Component\Sensor Component\Sensor\Illuminant</Filter>
+    </ClCompile>
+    <ClCompile Include="UltrasonicWave.cpp">
+      <Filter>Header Files\Component\Sensor Component\Sensor\Ultra Sonic</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Header Files\Component\Timer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lab_08.ino" />
+  </ItemGroup>
+</Project>
