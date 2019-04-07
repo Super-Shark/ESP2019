@@ -26,11 +26,11 @@ void UltrasonicWave::initUSS() {
 	this->eState = EState::eWaitForDeviceReady;
 }
 
-int  UltrasonicWave::getVal() {
+void UltrasonicWave::sense() {
 	if (micros() - this->startTime_ > MJUC_TIME_OUT_OF_MEASURING_IN_MICROSECOND) {
 		this->elapsedTime_ = 0;
 		this->initUSS();
-		return 0;
+		return;
 	}
 
 	if (this->eState == EState::eWaitForDeviceReady) {
@@ -47,10 +47,23 @@ int  UltrasonicWave::getVal() {
 		if (this->pChannels[eIdReceiver]->read() == LOW) {
 			this->elapsedTime_ = micros() - this->startTime_;
 			this->initUSS();
-			return this->elapsedTime_;
 		}
 	}
-	return 0;
 }
 
+int UltrasonicWave::getState() {
+	int distance = this->elapsedTime_ / MJUC_DIVISOR_FOR_DISTANCE_CALCULATION;
 
+	if (distance < MJUC_DISTANCE_TOO_CLOSE) {
+		return EDistanceState::eTooClose;
+	}else if (distance < MJUC_DISTANCE_VERY_CLOSE) {
+		return EDistanceState::eVeryClose;
+	}else if (distance < MJUC_DISTANCE_CLOSE) {
+		return EDistanceState::eClose;
+	}else if (distance < MJUC_DISTANCE_FAR) {
+		return EDistanceState::eFar;
+	}else if (distance < MJUC_DISTANCE_VERY_FAR) {
+		return EDistanceState::eVeryFar;
+	}
+	return EDistanceState::eUnknown;
+}

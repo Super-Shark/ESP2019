@@ -5,10 +5,6 @@ RGBLED::RGBLED(int rPinNum, int gPinNum, int bPinNum) : rChannel(rPinNum, OUTPUT
 	this->pChannels[eIdRed] = &rChannel;
 	this->pChannels[eIdGreen] = &gChannel;
 	this->pChannels[eIdBlue] = &bChannel;
-	rgbValues[ELightState::eBright][EDistanceState::eVeryClose]._R = MJUC_LED_STRENGTH_STRONG;
-	rgbValues[ELightState::eBright][EDistanceState::eClose]._G = MJUC_LED_STRENGTH_STRONG;
-	rgbValues[ELightState::eBright][EDistanceState::eFar]._G = MJUC_LED_STRENGTH_STRONG;
-	rgbValues[ELightState::eBright][EDistanceState::eVeryFar]._B = MJUC_LED_STRENGTH_STRONG;
 }
 RGBLED::~RGBLED() {}
 
@@ -25,12 +21,29 @@ void RGBLED::finalize() {
 }
 
 void RGBLED::actuate() {
-	this->pChannels[eIdRed]->write(this->rgbValues[this->eLishtStateIndex_][this->eDistanceStateIndex_]._R);
-	this->pChannels[eIdGreen]->write(this->rgbValues[this->eLishtStateIndex_][this->eDistanceStateIndex_]._G);
-	this->pChannels[eIdBlue]->write(this->rgbValues[this->eLishtStateIndex_][this->eDistanceStateIndex_]._B);
+	this->pChannels[eIdRed]->write(Rvalue);
+	this->pChannels[eIdGreen]->write(Gvalue);
+	this->pChannels[eIdBlue]->write(Bvalue);
 }
 
-void RGBLED::setState(int eLishtStateIndex, int eDistanceStateIndex) {
-	this->eLishtStateIndex_ = eLishtStateIndex;
-	this->eDistanceStateIndex_ = eDistanceStateIndex;
+void RGBLED::setValue(int r, int g, int b) {
+	Rvalue = r;
+	Gvalue = g;
+	Bvalue = b;
 }
+
+void RGBLED:: setState(int state) {
+	if (state == RGBLEDState::eOff) {
+		this->setValue(0, 0, 0);
+	}
+	else if (state == RGBLEDState::eRedOn) {
+		this->setValue(255, 0, 0);
+	}
+	else if (state == RGBLEDState::eGreenOn) {
+		this->setValue(0, 255, 0);
+	}
+	else if (state == RGBLEDState::eBlueOn) {
+		this->setValue(0, 0, 255);
+	}
+}
+

@@ -12,6 +12,10 @@ void Illuminant::finalize() {
 	this->channel.finalize();
 }
 
+//void Illuminant::sense() {
+//	this->cdsLight_ = this->channel.read();
+//}
+
 int Illuminant::getVal() {
-	return this->channel.read();
+	return this->channel.read();//> MJUC_LIGHT_DISTINCTION ? ELightState::eDark : ELightState::eBright
 }

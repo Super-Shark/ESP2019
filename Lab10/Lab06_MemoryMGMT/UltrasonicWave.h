@@ -33,9 +33,9 @@ public:
 	~UltrasonicWave();
 	void initialize();
 	void finalize();
-
-	int getVal();
+	void sense();
 	void initUSS();
+	int getState();
 };
 
 #endif

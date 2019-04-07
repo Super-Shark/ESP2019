@@ -13,12 +13,6 @@
 class IlluminantMT : public SensorMT {
 public:
 	int getState(int val) {
-		/*if (val > MJUC_LIGHT_DISTINCTION) {
-			digitalWrite(2, HIGH);
-		}
-		else {
-			digitalWrite(2, LOW);
-		}*/
 		return val > MJUC_LIGHT_DISTINCTION ? ELightState::eDark : ELightState::eBright;
 	}
 };

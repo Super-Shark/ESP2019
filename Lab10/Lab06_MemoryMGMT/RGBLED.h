@@ -11,7 +11,7 @@
 #include "AnalogChannel.h"
 #include "Globals.h"
 
-class RGBLED : public Actuator{
+class RGBLED: public Actuator{
 public:
 	enum EChannelId {
 		eIdRed,
@@ -19,19 +19,22 @@ public:
 		eIdBlue,
 		eNumChannelIds
 	};
-	int Rvalue=0;
-	int Gvalue =0;
-	int Bvalue =0;
+	typedef struct _RBGValue {
+		int _R=0;
+		int _G=0;
+		int _B=0;
+	} RGBValue;
 private:
 	AnalogChannel rChannel, gChannel, bChannel;
 	Channel *pChannels[eNumChannelIds];
+	int eLishtStateIndex_, eDistanceStateIndex_;
+	RGBValue rgbValues[ELightState::eNumLightStates][EDistanceState::eNumDistanceStates];
 public:
 	RGBLED(int rPinNum, int gPinNum, int bPinNum);
 	~RGBLED();
 	void initialize();
 	void finalize();
 	void actuate();
-	void setState(int state);
-	void setValue(int r, int g, int b);
+	void setState(int eLishtStateIndex, int eDistanceStateIndex);
 };
 #endif

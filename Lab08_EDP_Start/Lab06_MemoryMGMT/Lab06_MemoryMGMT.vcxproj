@@ -113,31 +113,28 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actuator.h" />
+    <ClInclude Include="ActuatorComponent.h" />
+    <ClInclude Include="ActuatorMT.h" />
     <ClInclude Include="AnalogChannel.h" />
     <ClInclude Include="Channel.h" />
     <ClInclude Include="Illuminant_MT.h" />
-    <ClInclude Include="MSG_Generator.h" />
+    <ClInclude Include="RGBLED_MT.h" />
     <ClInclude Include="SensorComponent.h" />
     <ClInclude Include="DigitalChannel.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Illuminant.h" />
-    <ClInclude Include="LEDManager.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="MemoryManager.h" />
-    <ClInclude Include="Message.h" />
     <ClInclude Include="RGBLED.h" />
     <ClInclude Include="Sensor.h" />
     <ClInclude Include="SensorMT.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UltrasonicWave.h" />
+    <ClInclude Include="USS_MT.h" />
     <ClInclude Include="__vm\.Lab06_MemoryMGMT.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActuatorComponent.cpp" />
     <ClCompile Include="Illuminant.cpp" />
-    <ClCompile Include="LEDManager.cpp" />
-    <ClCompile Include="MemoryManager.cpp" />
-    <ClCompile Include="Message.cpp" />
     <ClCompile Include="RGBLED.cpp" />
     <ClCompile Include="SensorComponent.cpp" />
     <ClCompile Include="Timer.cpp" />

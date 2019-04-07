@@ -16,6 +16,12 @@
     <Filter Include="Header Files\Channel">
       <UniqueIdentifier>{a8a1e9c7-73ad-4337-842e-1de08f4f9dc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Memory Manager">
+      <UniqueIdentifier>{889c72cb-3855-4680-b4e6-a6ac4cbf4fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Domain">
+      <UniqueIdentifier>{0863f2f7-6b62-49de-8b39-9f0f949073f5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Header Files\Component">
       <UniqueIdentifier>{1207c854-da8b-4759-849b-cfea9bb0bd23}</UniqueIdentifier>
     </Filter>
@@ -49,9 +55,6 @@
     <Filter Include="Header Files\Component\Actuator Component\Actuator">
       <UniqueIdentifier>{0f6c5f62-fb79-46d9-960c-41caf4375696}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Component\Actuator Component\Actuator\RGBLED">
-      <UniqueIdentifier>{9eae5696-7e54-457a-b4b9-110c597ad3ad}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.Lab06_MemoryMGMT.vsarduino.h">
@@ -75,8 +78,20 @@
     <ClInclude Include="Sensor.h">
       <Filter>Header Files\Component\Sensor Component\Sensor</Filter>
     </ClInclude>
+    <ClInclude Include="RGBLED.h">
+      <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClInclude>
     <ClInclude Include="Actuator.h">
       <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryManager.h">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="LEDManager.h">
+      <Filter>Header Files\Domain</Filter>
     </ClInclude>
     <ClInclude Include="SensorComponent.h">
       <Filter>Header Files\Component\Sensor Component</Filter>
@@ -96,23 +111,23 @@
     <ClInclude Include="Illuminant_MT.h">
       <Filter>Header Files\Component\Mapping Table\Sensor MT</Filter>
     </ClInclude>
-    <ClInclude Include="USS_MT.h">
-      <Filter>Header Files\Component\Mapping Table\Sensor MT</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBLED.h">
-      <Filter>Header Files\Component\Actuator Component\Actuator\RGBLED</Filter>
-    </ClInclude>
-    <ClInclude Include="ActuatorComponent.h">
-      <Filter>Header Files\Component\Actuator Component</Filter>
-    </ClInclude>
-    <ClInclude Include="ActuatorMT.h">
-      <Filter>Header Files\Component\Mapping Table\Actuator MT</Filter>
-    </ClInclude>
-    <ClInclude Include="RGBLED_MT.h">
-      <Filter>Header Files\Component\Mapping Table\Actuator MT</Filter>
+    <ClInclude Include="MSG_Generator.h">
+      <Filter>Header Files\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RGBLED.cpp">
+      <Filter>Header Files\Component\Actuator Component\Actuator</Filter>
+    </ClCompile>
+    <ClCompile Include="MemoryManager.cpp">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>Header Files\Memory Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LEDManager.cpp">
+      <Filter>Header Files\Domain</Filter>
+    </ClCompile>
     <ClCompile Include="SensorComponent.cpp">
       <Filter>Header Files\Component\Sensor Component</Filter>
     </ClCompile>
@@ -127,9 +142,6 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Header Files\Component\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="RGBLED.cpp">
-      <Filter>Header Files\Component\Actuator Component\Actuator\RGBLED</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
